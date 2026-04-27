@@ -2,7 +2,9 @@
 let auth, db;
 
 function initializeFirebase() {
-  firebase.initializeApp(window.firebaseConfig);
+  if (!firebase.apps.length) {
+    firebase.initializeApp(window.firebaseConfig);
+  }
   auth = firebase.auth();
   db = firebase.firestore();
 }

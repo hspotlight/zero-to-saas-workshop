@@ -34,7 +34,10 @@ async function logout() {
 document.addEventListener('DOMContentLoaded', () => {
   initializeFirebase();
 
+  // Only run login page UI when the login form is present
   const loginForm = document.getElementById('login-form');
+  if (!loginForm) return;
+
   const registerForm = document.getElementById('register-form');
   const showRegisterBtn = document.getElementById('show-register');
   const showLoginBtn = document.getElementById('show-login');
@@ -107,12 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
     usernameStatus.textContent = 'Checking…';
     usernameStatus.className = '';
     debounceTimer = setTimeout(async () => {
-      const available = await isAvailable(slug);
-      if (available) {
-        usernameStatus.textContent = `✓ ${slug} is available`;
-        usernameStatus.className = 'status-ok';
-      } else {
-        usernameStatus.textContent = `✗ ${slug} is already taken`;
+      try {
+        const available = await isAvailable(slug);
+        if (available) {
+          usernameStatus.textContent = `✓ ${slug} is available`;
+          usernameStatus.className = 'status-ok';
+        } else {
+          usernameStatus.textContent = `✗ ${slug} is already taken`;
+          usernameStatus.className = 'status-error';
+        }
+      } catch (err) {
+        usernameStatus.textContent = 'Could not check availability. Please try again.';
         usernameStatus.className = 'status-error';
       }
     }, 400);

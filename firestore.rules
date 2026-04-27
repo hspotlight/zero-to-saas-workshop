@@ -28,9 +28,10 @@ service cloud.firestore {
         allow write: if request.auth.uid == userId;
       }
 
-      // Analytics — only owner can read/write
+      // Analytics — owner can read; anyone can write (public visitors record views/clicks)
       match /analytics/{doc} {
-        allow read, write: if request.auth.uid == userId;
+        allow read: if request.auth.uid == userId;
+        allow write: if true;
       }
     }
 

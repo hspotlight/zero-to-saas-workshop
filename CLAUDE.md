@@ -79,3 +79,10 @@ Key principles enforced by the scaffold:
 - Use **vertical slices** (tracer bullet through the stack), not horizontal layers
 - Prefer integration-style tests over unit tests
 - Avoid mocking internals — mock only at system boundaries
+
+## Workflow
+- TDD: write test first, then implementation
+- Vertical slicing: each feature is end-to-end (UI → logic → data → test)
+- Keep all Firebase logic in firebase.js
+- Never commit .env files
+- One feature per branch, PR to merge

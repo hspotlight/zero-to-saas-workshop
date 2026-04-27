@@ -1,0 +1,42 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Username registry — public read so anyone can resolve a slug to a userId
+    // Write is locked to authenticated users creating their own entry
+    match /usernames/{slug} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // User data — owners can read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+
+      // Public read for profile so the public profile page can load without auth
+      match /profile/{doc=**} {
+        allow read: if true;
+        allow write: if request.auth.uid == userId;
+      }
+
+      // Public read for links so the public profile page can display them
+      match /links/{linkId} {
+        allow read: if true;
+        allow write: if request.auth.uid == userId;
+      }
+
+      // Analytics — only owner can read/write
+      match /analytics/{doc} {
+        allow read, write: if request.auth.uid == userId;
+      }
+    }
+
+    // Deny everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

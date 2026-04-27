@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link in Bio</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="public-page">
+
+  <!-- Profile container -->
+  <div id="profile-container" class="public-profile">
+    <img id="profile-photo" class="profile-photo" src="" alt="Profile photo" style="display:none;" />
+    <h1 id="profile-display-name" class="profile-name"></h1>
+    <p id="profile-bio" class="profile-bio"></p>
+    <div id="links-list" class="public-links"></div>
+  </div>
+
+  <!-- Not found state -->
+  <div id="not-found" class="not-found" style="display:none;">
+    <h2>Page not found</h2>
+    <p>This profile doesn't exist.</p>
+    <a href="/login.html" class="btn-primary">Create yours</a>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="/firebase-config.js"></script>
+  <script src="/utils.js"></script>
+  <script src="/analytics.js"></script>
+  <script src="/public-profile.js"></script>
+  <script src="/public-page.js"></script>
+</body>
+</html>

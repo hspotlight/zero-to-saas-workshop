@@ -15,6 +15,7 @@ A **Claude Code skills workshop** — not a runnable application. It contains sk
 | `tdd` | `/tdd` | Red-green-refactor TDD loop for features/bug fixes |
 | `grill-me` | `/grill-me` | Stress-test a plan through relentless questioning |
 | `to-prd` | `/to-prd` | Convert conversation context into a PRD GitHub issue |
+| `qa` | `/qa` | Conversational QA session that files GitHub issues for bugs |
 
 Skills/plugins live in:
 - `.claude/skills/` — local skills defined in this repo

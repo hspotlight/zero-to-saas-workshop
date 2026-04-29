@@ -25,5 +25,5 @@ async function updateProfile(userId, fields) {
   await db
     .collection('users').doc(userId)
     .collection('profile').doc('data')
-    .update(allowed);
+    .set(allowed, { merge: true });
 }

@@ -7,7 +7,24 @@ async function getProfile(userId) {
     .collection('profile').doc('data')
     .get();
   if (!doc.exists) return null;
-  return { id: doc.id, ...doc.data() };
+  const data = { id: doc.id, ...doc.data() };
+
+  // Recover username if missing — look it up from the usernames collection
+  // and patch the profile doc so future reads don't need this fallback
+  if (!data.username) {
+    const snap = await db.collection('usernames')
+      .where('userId', '==', userId)
+      .limit(1)
+      .get();
+    if (!snap.empty) {
+      data.username = snap.docs[0].id;
+      await db.collection('users').doc(userId)
+        .collection('profile').doc('data')
+        .set({ username: data.username }, { merge: true });
+    }
+  }
+
+  return data;
 }
 
 async function updateProfile(userId, fields) {

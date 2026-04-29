@@ -30,12 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadProfile() {
   const data = await getProfile(currentUser.uid);
   if (!data) return;
+  document.getElementById('profile-username').value = data.username || '';
   document.getElementById('profile-display-name').value = data.displayName || '';
   document.getElementById('profile-bio').value = data.bio || '';
   document.getElementById('profile-photo-url').value = data.photoURL || '';
   const slug = data.username || '';
   const profileLink = document.getElementById('profile-link');
-  profileLink.href = `/${slug}`;
+  profileLink.href = `/profile.html?u=${encodeURIComponent(slug)}`;
   profileLink.textContent = `/${slug}`;
 }
 

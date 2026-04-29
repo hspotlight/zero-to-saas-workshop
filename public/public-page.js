@@ -4,7 +4,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   initializeFirebase();
 
-  const slug = window.location.pathname.replace(/^\//, '').split('/')[0];
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('u') || window.location.pathname.replace(/^\//, '').split('/')[0];
 
   if (!slug || slug === 'profile.html') {
     showNotFound();

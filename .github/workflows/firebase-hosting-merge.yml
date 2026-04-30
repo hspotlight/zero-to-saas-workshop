@@ -14,7 +14,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
       - run: npm install
       - run: cp public/config/firebase-prod.js public/firebase-config.js
       - uses: FirebaseExtended/action-hosting-deploy@v0

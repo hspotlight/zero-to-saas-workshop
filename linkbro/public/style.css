@@ -1,0 +1,259 @@
+/* Minimal structural CSS — styling deferred to frontend-design skill */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  background: #fafafa;
+}
+
+/* Auth page */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.auth-card h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Forms */
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background: #333;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #555;
+}
+
+/* Profile page (public) */
+.profile-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.profile-page h1 {
+  margin-bottom: 0.5rem;
+}
+
+.profile-page p {
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+/* Links list (public) */
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.link-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  text-align: center;
+  transition: background 0.15s;
+}
+
+.link-item:hover {
+  background: #f0f0f0;
+}
+
+/* Admin header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-right span {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+/* Admin page */
+.admin-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.admin-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.admin-section h2 {
+  margin-bottom: 1rem;
+}
+
+/* Admin links list */
+.admin-links-list {
+  list-style: none;
+}
+
+.admin-link-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  cursor: grab;
+}
+
+.admin-link-item.dragging {
+  opacity: 0.4;
+}
+
+.admin-link-item.hidden-link {
+  opacity: 0.5;
+}
+
+.link-drag-handle {
+  color: #aaa;
+  cursor: grab;
+}
+
+.link-title {
+  font-weight: 500;
+  flex: 1;
+}
+
+.link-url {
+  color: #888;
+  font-size: 0.875rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.link-actions button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Preview panel */
+.preview-panel {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.preview-content {
+  max-width: 400px;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+/* Messages */
+.error-msg {
+  color: #d32f2f;
+  margin-top: 0.5rem;
+}
+
+.msg {
+  color: #388e3c;
+  margin-top: 0.5rem;
+}
+
+.loading {
+  text-align: center;
+  color: #888;
+  padding: 2rem;
+}

@@ -1,0 +1,52 @@
+name: Deploy to Prod
+
+on:
+  push:
+    branches: [main]
+
+env:
+  FIREBASE_PROJECT_ID: linkbro-prod
+  GCP_PROJECT_NUMBER: YOUR_GCP_PROJECT_NUMBER
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
+
+      - run: pnpm install
+      - run: pnpm test
+
+      - name: Set Firebase config
+        run: cp public/config/firebase-prod.js public/firebase-config.js
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github/providers/github
+          service_account: github-firebase-deploy@${{ env.FIREBASE_PROJECT_ID }}.iam.gserviceaccount.com
+
+      - name: Deploy to Firebase
+        run: npx firebase-tools deploy --project ${{ env.FIREBASE_PROJECT_ID }}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkBro - Admin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="admin-header">
+    <h1>LinkBro Admin</h1>
+    <div class="header-right">
+      <span id="user-email"></span>
+      <button id="logout-btn">Log Out</button>
+    </div>
+  </header>
+
+  <main class="admin-page">
+    <!-- Profile Section -->
+    <section class="admin-section">
+      <h2>Profile</h2>
+      <form id="profile-form">
+        <label for="profile-name-input">Name</label>
+        <input type="text" id="profile-name-input" maxlength="100" required />
+        <label for="profile-bio-input">Bio</label>
+        <textarea id="profile-bio-input" maxlength="300" rows="3"></textarea>
+        <button type="submit">Save Profile</button>
+      </form>
+      <p id="profile-msg" class="msg"></p>
+    </section>
+
+    <!-- Add Link Section -->
+    <section class="admin-section">
+      <h2>Add Link</h2>
+      <form id="add-link-form">
+        <label for="add-title">Title</label>
+        <input type="text" id="add-title" maxlength="100" required />
+        <label for="add-url">URL</label>
+        <input type="url" id="add-url" placeholder="https://" required />
+        <button type="submit">Add Link</button>
+      </form>
+      <p id="add-error" class="error-msg"></p>
+    </section>
+
+    <!-- Links List Section -->
+    <section class="admin-section">
+      <h2>Links</h2>
+      <button id="preview-btn">Preview</button>
+      <ul id="admin-links-list" class="admin-links-list"></ul>
+    </section>
+
+    <!-- Preview Panel -->
+    <section id="preview-panel" class="preview-panel" style="display:none;">
+      <h2>Public Page Preview</h2>
+      <div class="preview-content">
+        <h3 id="preview-name"></h3>
+        <p id="preview-bio"></p>
+        <div id="preview-links" class="links-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2>Edit Link</h2>
+      <form id="edit-form">
+        <input type="hidden" id="edit-id" />
+        <label for="edit-title">Title</label>
+        <input type="text" id="edit-title" maxlength="100" required />
+        <label for="edit-url">URL</label>
+        <input type="url" id="edit-url" placeholder="https://" required />
+        <div class="modal-actions">
+          <button type="submit">Save</button>
+          <button type="button" id="cancel-edit">Cancel</button>
+        </div>
+      </form>
+      <p id="edit-error" class="error-msg"></p>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="utils.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

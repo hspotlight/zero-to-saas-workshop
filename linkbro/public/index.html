@@ -4,22 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LinkBro</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="profile-page">
-    <div id="loading" class="loading">Loading...</div>
-    <h1 id="profile-name"></h1>
-    <p id="profile-bio"></p>
-    <div id="links-list" class="links-list"></div>
-  </main>
-
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
   <script src="firebase-config.js"></script>
   <script src="utils.js"></script>
-  <script src="index.js"></script>
+  <script>
+    initializeFirebase();
+    onAuthStateChanged(function(user) {
+      if (user) {
+        window.location.href = '/admin.html';
+      } else {
+        window.location.href = '/login.html';
+      }
+    });
+  </script>
 </body>
 </html>

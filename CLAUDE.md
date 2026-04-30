@@ -86,3 +86,62 @@ Key principles enforced by the scaffold:
 - Keep all Firebase logic in firebase.js
 - Never commit .env files
 - One feature per branch, PR to merge
+
+## Current Project: Link-in-Bio App
+
+The app being built in this workshop is a **single-user Link-in-Bio web app** (self-hosted Linktree alternative on Firebase). Full PRD is in `PRD-link-in-bio.md`.
+
+### Modules
+
+| Module | File | Responsibility |
+|---|---|---|
+| Auth | `auth.js` | `signIn(email, password)`, `signOut()`, `onAuthStateChanged(callback)` |
+| Links | `links.js` | `getLinks()`, `addLink(title, url)`, `updateLink(id, data)`, `deleteLink(id)`, `setLinkVisibility(id, visible)`, `reorderLinks(orderedIds)` |
+| Profile | `profile.js` | `getProfile()`, `updateProfile(name, bio)` |
+| Analytics | `analytics.js` | `trackLinkClick(title, url)` — thin wrapper around `logEvent` |
+| Public page | `index.js` | Renders visible links + profile; fires `trackLinkClick` on click |
+| Admin page | `admin.js` | Full CRUD UI + drag-to-reorder (HTML5 DnD); protected by auth |
+
+### Data Shape (Firestore)
+
+```
+users/{userId}/links/{linkId}
+  title: string
+  url: string
+  visible: boolean
+  order: number
+  createdAt: timestamp
+
+users/{userId}/profile
+  name: string
+  bio: string
+```
+
+### Routing
+
+- `/` — Public profile page (no auth)
+- `/admin` — Admin panel (redirects to `/login` if not authenticated)
+- `/login` — Login page (redirects to `/admin` if already authenticated)
+
+### Key Constraints
+
+- **XSS**: All user content escaped via `escapeHtml()` before DOM insertion
+- **Ordering**: Links sorted ascending by `order`; drag-to-reorder batch-updates all `order` values
+- **Security rules**: Writes under `users/{userId}/` require `request.auth.uid == userId`; public reads allowed on profile + links
+- **No bundler**: Firebase CDN compat SDK v10.8.0 only
+- **Single user**: `userId` is constant at runtime (the one registered account)
+
+### What to Test
+
+- **Links module**: `addLink`, `updateLink`, `deleteLink`, `setLinkVisibility`, `reorderLinks` — verify data shapes and ordering
+- **Profile module**: `getProfile`, `updateProfile`
+- **Auth module**: `signIn`, `signOut`
+- **Analytics module**: `trackLinkClick` calls `logEvent` with correct event name + params
+- **Public page**: only visible links rendered, `escapeHtml` applied, click handlers call `trackLinkClick`
+
+## Workflow
+- TDD: write test first, then implementation
+- Vertical slicing: each feature is end-to-end (UI → logic → data → test)
+- Keep all Firebase logic in firebase.js
+- Never commit .env files
+- One feature per branch, PR to merge

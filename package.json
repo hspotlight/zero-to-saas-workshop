@@ -1,0 +1,16 @@
+{
+  "name": "link-in-bio",
+  "version": "1.0.0",
+  "description": "A Link-in-Bio app for creators — one public profile page with all their links and click analytics.",
+  "scripts": {
+    "dev:setup": "cp public/config/firebase-test.js public/firebase-config.js",
+    "serve": "pnpm dev:setup && python3 -m http.server 3000 --directory public",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "deploy": "firebase deploy"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}

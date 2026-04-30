@@ -14,7 +14,7 @@ A **Claude Code skills workshop** — not a runnable application. It contains sk
 | `frontend-design` | `/frontend-design` | Generate distinctive, production-grade UI (plugin) |
 | `tdd` | `/tdd` | Red-green-refactor TDD loop for features/bug fixes |
 | `grill-me` | `/grill-me` | Stress-test a plan through relentless questioning |
-| `to-prd` | `/to-prd` | Convert conversation context into a PRD GitHub issue |
+| `to-prd` | `/to-prd` | Convert conversation context into a PRD — submit as GitHub issue or write to a file (`/to-prd write a file`) |
 | `qa` | `/qa` | Conversational QA session that files GitHub issues for bugs |
 
 Skills/plugins live in:
@@ -72,6 +72,18 @@ Key principles enforced by the scaffold:
 - **Config strategy**: Environment configs are committed (not secrets); active `firebase-config.js` is gitignored and copied at build/serve time
 - **XSS prevention**: `escapeHtml()` used before inserting any user content into the DOM
 - **Tests target pure functions**: No Firebase SDK calls in tests — validation, data shapes, and UI helpers only
+
+## Agents
+
+Project-specific agents live in `.claude/agents/`. They are scoped to the Link-in-Bio app and work in conjunction with the skills above.
+
+| Agent | Purpose |
+|---|---|
+| `developer` | Implement features, fix bugs, scaffold modules following project architecture |
+| `qa` | Test features against the PRD, find bugs, file GitHub issues |
+| `code-reviewer` | Review code for correctness, security, and convention adherence before merging |
+
+Invoke them via the Agent tool or by asking Claude to "use the developer/qa/code-reviewer agent".
 
 ## tdd Skill Philosophy
 

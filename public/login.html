@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link in Bio — Sign In</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-card">
+    <h1 class="logo">Link in Bio</h1>
+    <p class="tagline">Your links, one URL.</p>
+
+    <!-- Login form -->
+    <form id="login-form" class="auth-form">
+      <h2>Sign in</h2>
+      <div id="login-error" class="error-message" style="display:none;"></div>
+      <label>
+        Email
+        <input type="email" id="login-email" required autocomplete="email" />
+      </label>
+      <label>
+        Password
+        <input type="password" id="login-password" required autocomplete="current-password" />
+      </label>
+      <button type="submit" class="btn-primary">Sign in</button>
+      <p class="auth-switch">
+        No account? <button type="button" id="show-register" class="btn-link">Create one</button>
+      </p>
+    </form>
+
+    <!-- Register form (hidden by default) -->
+    <form id="register-form" class="auth-form" style="display:none;">
+      <h2>Create account</h2>
+      <div id="register-error" class="error-message" style="display:none;"></div>
+      <label>
+        Email
+        <input type="email" id="register-email" required autocomplete="email" />
+      </label>
+      <label>
+        Password
+        <input type="password" id="register-password" required autocomplete="new-password" minlength="6" />
+      </label>
+      <label>
+        Username
+        <input type="text" id="register-username" required
+               placeholder="e.g. janedoe"
+               autocomplete="off"
+               pattern="[-a-z0-9]+"
+               minlength="3" maxlength="30" />
+        <span id="username-status" class="field-hint"></span>
+      </label>
+      <button type="submit" class="btn-primary">Create account</button>
+      <p class="auth-switch">
+        Already have an account? <button type="button" id="show-login" class="btn-link">Sign in</button>
+      </p>
+    </form>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="utils.js"></script>
+  <script src="username.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

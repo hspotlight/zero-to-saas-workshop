@@ -10,7 +10,7 @@
 
   onAuthStateChanged(function(user) {
     if (user) {
-      window.location.href = '/admin';
+      window.location.href = '/admin.html';
     }
   });
 
@@ -28,7 +28,7 @@
 
     signIn(email, password)
       .then(function() {
-        window.location.href = '/admin';
+        window.location.href = '/admin.html';
       })
       .catch(function(err) {
         errorEl.textContent = err.message;

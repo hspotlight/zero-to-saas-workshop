@@ -1,11 +1,10 @@
 // TODO: Replace with your Firebase project config from Firebase Console
 // Go to: Firebase Console → Project Settings → Your apps → Config
 window.firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "linkbro-test.firebaseapp.com",
-  projectId: "linkbro-test",
-  storageBucket: "linkbro-test.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID",
+  apiKey: "AIzaSyApnZXU2irHzkXJHX_sus7xnyyCEgfzx1E",
+  authDomain: "linkk-test.firebaseapp.com",
+  projectId: "linkk-test",
+  storageBucket: "linkk-test.firebasestorage.app",
+  messagingSenderId: "4485261580",
+  appId: "1:4485261580:web:f7e74a4945e24b38790129"
 };

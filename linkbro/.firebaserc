@@ -1,6 +1,7 @@
 {
   "projects": {
-    "test": "linkbro-test",
-    "prod": "linkbro-prod"
+    "test": "linkk-test",
+    "prod": "linkbro-prod",
+    "default": "linkk-test"
   }
 }
